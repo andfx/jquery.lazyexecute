@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jQuery.lazyexecute Demo</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:700,400">
+    <link rel="stylesheet" type="text/css" href="screen.css">
+
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="../jquery.lazyexecute.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        var initDate = new Date();
+
+        $(".tracker").lazyexecute(function($tracker) {
+          var date = new Date();
+          $tracker.hide().html([
+            "<p>",
+              "Lazily executed at<br />",
+              date.getHours() + ":",
+              date.getMinutes() + ":",
+              date.getSeconds(),
+            "</p>"].join("")).fadeIn('slow');
+          console.log("[lazy execution] Executed function for element no. " + $tracker.data("position"));
+        }, {
+          treshold: 0,
+          event: "scroll"
+        });
+
+        console.log("[lazy execution] Initialized in " + (new Date() - initDate) + "ms");
+      })
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1>
+        jQuery.lazyexecute
+        <small>Demo</small>
+      </h1>
+
+      <p>
+        This page demonstrates the effect of the jquery.lazyexecute-Plugin. Scroll down to see the effect.
+      </p>
+
+      <div class="tracker" data-position="1"></div>
+      <div class="space"></div>
+      <div class="tracker" data-position="2"></div>
+      <div class="space"></div>
+      <div class="tracker" data-position="3"></div>
+      <div class="space"></div>
+      <div class="tracker" data-position="4"></div>
+    </div>
+  </body>
+</html>
